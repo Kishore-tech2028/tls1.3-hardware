@@ -64,6 +64,9 @@ module aead_decrypt_dispatch (
     logic [7:0]    inner_ct_r, inner_ct_w;
     logic          key_loaded_r, key_loaded_w;
     traffic_key_t  rx_key_r, rx_key_w;
+    logic [7:0]    ciphertext_buffer_lsb;
+
+    assign ciphertext_buffer_lsb = ciphertext_buffer_r[7:0];
 
     // ========================================================================
     // Sequential Logic
@@ -127,7 +130,7 @@ module aead_decrypt_dispatch (
             BUFFER_CT: begin
                 if (ciphertext_valid && ciphertext_length_r < MAX_RECORD_PLAINTEXT) begin
                     // Shift in new byte
-                    ciphertext_buffer_w = {ciphertext_buffer_r[2039:0], ciphertext_byte};
+                    ciphertext_buffer_w = (ciphertext_buffer_r << 8) | ciphertext_byte;
                     ciphertext_length_w = ciphertext_length_r + 14'h0001;
                     ciphertext_ready = 1'b1;
                 end else if (auth_tag_valid) begin
@@ -162,7 +165,7 @@ module aead_decrypt_dispatch (
                 // Output plaintext bytes
                 if (plaintext_ready && ciphertext_length_r > 0) begin
                     plaintext_valid = 1'b1;
-                    plaintext_byte = ciphertext_buffer_r[7:0];  // First decrypted byte
+                    plaintext_byte = ciphertext_buffer_lsb;  // First decrypted byte
                     ciphertext_length_w = ciphertext_length_r - 14'h0001;
                 end else begin
                     // Extract inner content type from last byte (padding removal)

@@ -97,6 +97,9 @@ module record_layer_top (
     logic [31:0] tx_fifo_write_data;
     logic        tx_fifo_write_ready;
     logic        tx_fifo_write_almost_full;
+    logic        tx_encrypt_plaintext_ready;
+    logic        rx_parser_fifo_read_ready;
+    logic        rx_decrypt_ciphertext_ready;
 
     // ========================================================================
     // RX FIFO Instantiation
@@ -145,7 +148,7 @@ module record_layer_top (
         .fifo_read_en      (rx_fifo_read_en),
         .fifo_read_data    (rx_fifo_read_data),
         .fifo_read_valid   (rx_fifo_read_valid),
-        .fifo_read_ready   (rx_fifo_read_ready),
+        .fifo_read_ready   (rx_parser_fifo_read_ready),
         .hs_type           (hs_record_type),
         .hs_version        (hs_version),
         .hs_length         (hs_length),
@@ -184,7 +187,7 @@ module record_layer_top (
         .app_payload_ready       (tx_app_payload_ready),
         .tx_fifo_data            (tx_fifo_write_data),
         .tx_fifo_valid           (tx_fifo_write_en),
-        .tx_fifo_ready           (tx_fifo_write_ready),
+        .tx_fifo_ready           (tx_encrypt_plaintext_ready),
         .record_type_out         (),
         .record_version_out      (),
         .record_length_out       (),
@@ -201,7 +204,7 @@ module record_layer_top (
         .tx_key_valid       (tx_key_valid),
         .plaintext_byte     (tx_fifo_write_data[7:0]),
         .plaintext_valid    (tx_fifo_write_en),
-        .plaintext_ready    (tx_fifo_write_ready),
+        .plaintext_ready    (tx_encrypt_plaintext_ready),
         .inner_content_type (8'h16),
         .inner_ct_valid     (1'b1),
         .inner_ct_ready     (),
@@ -224,7 +227,7 @@ module record_layer_top (
         .rx_key_valid                (rx_key_valid),
         .ciphertext_byte             (rx_fifo_read_data[7:0]),
         .ciphertext_valid            (rx_fifo_read_valid),
-        .ciphertext_ready            (rx_fifo_read_ready),
+        .ciphertext_ready            (rx_decrypt_ciphertext_ready),
         .auth_tag_in                 (128'h00000000000000000000000000000000),
         .auth_tag_valid              (1'b0),
         .auth_tag_ready              (),

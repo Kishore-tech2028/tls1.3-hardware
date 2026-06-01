@@ -68,6 +68,8 @@ module rx_record_parser (
     assign byte1 = fifo_read_data[15:8];
     assign byte2 = fifo_read_data[23:16];
     assign byte3 = fifo_read_data[31:24];
+    logic [5:0] byte0_lower6;
+    assign byte0_lower6 = byte0[5:0];
 
     // ========================================================================
     // Sequential Logic
@@ -129,7 +131,7 @@ module rx_record_parser (
                         5'h0: parsed_type_w[7:0]     = byte0;  // Type
                         5'h1: parsed_version_w[15:8] = byte0;  // Version MSB
                         5'h2: parsed_version_w[7:0]  = byte0;  // Version LSB
-                        5'h3: parsed_length_w[13:8]  = byte0[5:0];  // Length MSB (14 bits)
+                        5'h3: parsed_length_w[13:8]  = byte0_lower6;  // Length MSB (14 bits)
                         5'h4: parsed_length_w[7:0]   = byte0;  // Length LSB
                     endcase
 

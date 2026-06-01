@@ -45,6 +45,11 @@ module tx_record_framer (
     logic [13:0] payload_length_r, payload_length_w;
     logic [31:0] payload_buffer_r, payload_buffer_w;
     logic [4:0]  payload_bytes_count_r, payload_bytes_count_w;
+    logic [7:0]  payload_length_msb;
+    logic [7:0]  payload_length_lsb;
+
+    assign payload_length_msb = payload_length_r[13:8];
+    assign payload_length_lsb = payload_length_r[7:0];
 
     // Framing outputs
     logic frame_complete;
@@ -120,12 +125,12 @@ module tx_record_framer (
                     // Full implementation would pipeline header + payload
                     
                     if (record_type_r == 8'h16 && hs_payload_valid) begin
-                        payload_buffer_w = {payload_buffer_r[23:0], hs_payload_byte};
+                        payload_buffer_w = (payload_buffer_r << 8) | hs_payload_byte;
                         payload_bytes_count_w = payload_bytes_count_r + 5'h01;
                         payload_length_w = payload_length_r + 14'h0001;
                         hs_payload_ready = 1'b1;
                     end else if (record_type_r == 8'h17 && app_payload_valid) begin
-                        payload_buffer_w = {payload_buffer_r[23:0], app_payload_byte};
+                        payload_buffer_w = (payload_buffer_r << 8) | app_payload_byte;
                         payload_bytes_count_w = payload_bytes_count_r + 5'h01;
                         payload_length_w = payload_length_r + 14'h0001;
                         app_payload_ready = 1'b1;
@@ -147,8 +152,8 @@ module tx_record_framer (
                     tx_fifo_data = {
                         record_type_r,           // [31:24]
                         record_version_r,        // [23:8]
-                        payload_length_r[13:8], 
-                        payload_length_r[7:0],  // [7:0]
+                        payload_length_msb,
+                        payload_length_lsb       // [7:0]
                     };
                     tx_fifo_valid = 1'b1;
                     record_framed_valid = 1'b1;

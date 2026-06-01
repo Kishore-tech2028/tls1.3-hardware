@@ -60,6 +60,9 @@ module aead_encrypt_dispatch (
     logic [7:0]    inner_ct_r, inner_ct_w;
     logic          key_loaded_r, key_loaded_w;
     traffic_key_t  tx_key_r, tx_key_w;
+    logic [7:0]    plaintext_buffer_lsb;
+
+    assign plaintext_buffer_lsb = plaintext_buffer_r[7:0];
 
     // ========================================================================
     // Sequential Logic
@@ -119,7 +122,7 @@ module aead_encrypt_dispatch (
             BUFFER_PT: begin
                 if (plaintext_valid && plaintext_length_r < MAX_RECORD_PLAINTEXT) begin
                     // Shift in new byte
-                    plaintext_buffer_w = {plaintext_buffer_r[2039:0], plaintext_byte};
+                    plaintext_buffer_w = (plaintext_buffer_r << 8) | plaintext_byte;
                     plaintext_length_w = plaintext_length_r + 14'h0001;
                     plaintext_ready = 1'b1;
                 end else if (inner_ct_valid) begin
@@ -158,7 +161,7 @@ module aead_encrypt_dispatch (
                 // Output ciphertext bytes
                 if (ciphertext_ready && plaintext_length_r > 0) begin
                     ciphertext_valid = 1'b1;
-                    ciphertext_byte = plaintext_buffer_r[7:0];  // First encrypted byte
+                    ciphertext_byte = plaintext_buffer_lsb;  // First encrypted byte
                     plaintext_length_w = plaintext_length_r - 14'h0001;
                 end else begin
                     state_w = DONE;
