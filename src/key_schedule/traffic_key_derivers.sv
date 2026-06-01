@@ -25,7 +25,7 @@ module write_key_deriver (
         .rst_n          (rst_n),
         .valid_in       (valid_in),
         .prk            (traffic_secret),
-        .context        (128'd0),               // Empty context
+        .hkdf_context   (128'd0),               // Empty context
         .label_id       (8'd4),                 // "key" label
         .desired_length (16'd128),              // 128-bit key
         .okm            (expanded_key),
@@ -61,7 +61,7 @@ module write_iv_deriver (
         .rst_n          (rst_n),
         .valid_in       (valid_in),
         .prk            (traffic_secret),
-        .context        (128'd0),               // Empty context
+        .hkdf_context   (128'd0),               // Empty context
         .label_id       (8'd5),                 // "iv" label
         .desired_length (16'd96),               // 96-bit IV
         .okm            (expanded_iv),

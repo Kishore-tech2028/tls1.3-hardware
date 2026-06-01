@@ -22,7 +22,7 @@ module derive_secret_intermediate (
         .rst_n          (rst_n),
         .valid_in       (valid_in),
         .prk            (secret_in),
-        .context        (128'd0),               // Empty context for derived
+        .hkdf_context   (128'd0),               // Empty context for derived
         .label_id       (8'd4),                 // "derived" label ID
         .desired_length (16'd256),              // Output = 256 bits (32 bytes)
         .okm            (derived_secret),

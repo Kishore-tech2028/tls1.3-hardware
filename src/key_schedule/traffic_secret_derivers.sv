@@ -23,7 +23,7 @@ module client_hs_traffic_deriver (
         .rst_n          (rst_n),
         .valid_in       (valid_in),
         .prk            (handshake_secret),
-        .context        (transcript_hash[127:0]),  // Lower 128 bits as context
+        .hkdf_context   (transcript_hash[127:0]),  // Lower 128 bits as context
         .label_id       (8'd0),                 // "c hs traffic" label
         .desired_length (16'd256),              // 256-bit output
         .okm            (client_hs_traffic_secret),
@@ -53,7 +53,7 @@ module server_hs_traffic_deriver (
         .rst_n          (rst_n),
         .valid_in       (valid_in),
         .prk            (handshake_secret),
-        .context        (transcript_hash[127:0]),  // Lower 128 bits as context
+        .hkdf_context   (transcript_hash[127:0]),  // Lower 128 bits as context
         .label_id       (8'd1),                 // "s hs traffic" label
         .desired_length (16'd256),              // 256-bit output
         .okm            (server_hs_traffic_secret),
@@ -83,7 +83,7 @@ module client_ap_traffic_deriver (
         .rst_n          (rst_n),
         .valid_in       (valid_in),
         .prk            (master_secret),
-        .context        (transcript_hash[127:0]),  // Lower 128 bits as context
+        .hkdf_context   (transcript_hash[127:0]),  // Lower 128 bits as context
         .label_id       (8'd2),                 // "c ap traffic" label
         .desired_length (16'd256),              // 256-bit output
         .okm            (client_ap_traffic_secret),
@@ -113,7 +113,7 @@ module server_ap_traffic_deriver (
         .rst_n          (rst_n),
         .valid_in       (valid_in),
         .prk            (master_secret),
-        .context        (transcript_hash[127:0]),  // Lower 128 bits as context
+        .hkdf_context   (transcript_hash[127:0]),  // Lower 128 bits as context
         .label_id       (8'd3),                 // "s ap traffic" label
         .desired_length (16'd256),              // 256-bit output
         .okm            (server_ap_traffic_secret),

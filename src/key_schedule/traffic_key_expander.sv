@@ -20,6 +20,15 @@ module traffic_key_expander (
     logic [127:0] write_key;
     logic [95:0]  write_iv;
     logic key_valid, iv_valid;
+    logic traffic_key_pair_valid_r;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            traffic_key_pair_valid_r <= 1'b0;
+        end else if (key_valid & iv_valid) begin
+            traffic_key_pair_valid_r <= 1'b1;
+        end
+    end
 
     write_key_deriver u_key_deriver (
         .clk            (clk),
@@ -42,7 +51,7 @@ module traffic_key_expander (
     // Both derivers should complete at the same time
     assign traffic_key_pair.key   = write_key;
     assign traffic_key_pair.iv    = write_iv;
-    assign traffic_key_pair.valid = key_valid & iv_valid;
-    assign valid_out              = traffic_key_pair.valid;
+    assign traffic_key_pair.valid = traffic_key_pair_valid_r;
+    assign valid_out              = traffic_key_pair_valid_r;
 
 endmodule : traffic_key_expander
