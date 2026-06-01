@@ -1,0 +1,7 @@
+src/session_controller/circular_buffer/circular_buffer.sv
+src/session_controller/tcp_connection_manager/tcp_connection_manager.sv
+src/session_controller/role_config/role_config.sv
+src/session_controller/error_aggregator/error_aggregator.sv
+src/session_controller/tls_state_machine/tls_state_machine.sv
+src/session_controller/session_controller.sv
+tb/session_controller/tb_session_controller_enhanced.sv

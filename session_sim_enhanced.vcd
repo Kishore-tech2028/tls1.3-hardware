@@ -1,0 +1,716 @@
+$date
+	Fri May 29 15:27:14 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb_session_controller_enhanced $end
+$var wire 1 ! tx_valid $end
+$var wire 32 " tx_data [31:0] $end
+$var wire 1 # tls_tx_ready $end
+$var wire 1 $ tls_rx_valid $end
+$var wire 32 % tls_rx_data [31:0] $end
+$var wire 1 & send_alert $end
+$var wire 1 ' is_server_o $end
+$var wire 1 ( en_sh $end
+$var wire 1 ) en_cert $end
+$var wire 1 * en_app_data $end
+$var wire 8 + alert_code_o [7:0] $end
+$var reg 1 , cert_done $end
+$var reg 1 - cfg_svr $end
+$var reg 1 . cfg_wen $end
+$var reg 1 / ch_valid $end
+$var reg 1 0 clk $end
+$var reg 1 1 err_cert $end
+$var reg 1 2 err_decode $end
+$var reg 1 3 err_mac $end
+$var reg 1 4 err_record_len $end
+$var reg 1 5 err_seq_ov $end
+$var reg 1 6 keys_done $end
+$var reg 1 7 rst_n $end
+$var reg 32 8 rx_data [31:0] $end
+$var reg 1 9 rx_valid $end
+$var reg 1 : sh_done $end
+$var reg 1 ; tcp_conn $end
+$var reg 1 < tcp_disc $end
+$var reg 1 = tls_rx_ready $end
+$var reg 32 > tls_tx_data [31:0] $end
+$var reg 1 ? tls_tx_valid $end
+$var reg 1 @ tx_ready $end
+$scope module dut $end
+$var wire 1 A alert_clear $end
+$var wire 8 B alert_code_o [7:0] $end
+$var wire 1 , cert_done $end
+$var wire 1 / ch_valid $end
+$var wire 1 0 clk $end
+$var wire 1 - config_is_server $end
+$var wire 1 . config_write_en $end
+$var wire 1 1 err_cert $end
+$var wire 1 2 err_decode $end
+$var wire 1 3 err_mac $end
+$var wire 1 4 err_record_len $end
+$var wire 1 5 err_seq_overflow $end
+$var wire 1 ' is_server_o $end
+$var wire 1 6 keys_done $end
+$var wire 1 7 rst_n $end
+$var wire 1 : sh_done $end
+$var wire 1 ; tcp_conn $end
+$var wire 1 < tcp_disc $end
+$var wire 32 C tcp_rx_data [31:0] $end
+$var wire 1 9 tcp_rx_valid $end
+$var wire 1 @ tcp_tx_ready $end
+$var wire 1 = tls_rx_ready $end
+$var wire 32 D tls_tx_data [31:0] $end
+$var wire 1 ? tls_tx_valid $end
+$var wire 1 # tls_tx_ready $end
+$var wire 1 $ tls_rx_valid $end
+$var wire 32 E tls_rx_data [31:0] $end
+$var wire 1 ! tcp_tx_valid $end
+$var wire 32 F tcp_tx_data [31:0] $end
+$var wire 1 & send_alert $end
+$var wire 1 G is_server $end
+$var wire 1 H fatal_alert $end
+$var wire 1 ( en_sh $end
+$var wire 1 ) en_cert $end
+$var wire 1 * en_app_data $end
+$var wire 8 I alert_code [7:0] $end
+$scope module u_cfg $end
+$var wire 1 0 clk $end
+$var wire 1 - config_is_server $end
+$var wire 1 . config_write_en $end
+$var wire 1 7 rst_n $end
+$var reg 1 G is_server $end
+$upscope $end
+$scope module u_err $end
+$var wire 1 A alert_clear $end
+$var wire 1 0 clk $end
+$var wire 1 1 err_cert $end
+$var wire 1 2 err_decode $end
+$var wire 1 3 err_mac $end
+$var wire 1 4 err_record_len $end
+$var wire 1 5 err_seq_overflow $end
+$var wire 1 7 rst_n $end
+$var reg 8 J alert_code [7:0] $end
+$var reg 1 K any_error $end
+$var reg 8 L code_next [7:0] $end
+$var reg 1 H fatal_alert $end
+$upscope $end
+$scope module u_fsm $end
+$var wire 1 , cert_done $end
+$var wire 1 / ch_valid $end
+$var wire 1 0 clk $end
+$var wire 1 H fatal_alert $end
+$var wire 1 6 keys_done $end
+$var wire 1 7 rst_n $end
+$var wire 1 & send_alert $end
+$var wire 1 : sh_done $end
+$var wire 1 ; tcp_conn $end
+$var wire 1 < tcp_disc $end
+$var reg 1 * en_app_data $end
+$var reg 1 ) en_cert $end
+$var reg 1 ( en_sh $end
+$var reg 4 M next_state [3:0] $end
+$var reg 1 N send_alert_r $end
+$var reg 4 O state [3:0] $end
+$upscope $end
+$scope module u_tcp $end
+$var wire 1 0 clk $end
+$var wire 1 7 rst_n $end
+$var wire 32 P tcp_rx_data [31:0] $end
+$var wire 1 Q tcp_rx_ready $end
+$var wire 1 9 tcp_rx_valid $end
+$var wire 1 @ tcp_tx_ready $end
+$var wire 1 ! tcp_tx_valid $end
+$var wire 1 = tls_rx_ready $end
+$var wire 1 $ tls_rx_valid $end
+$var wire 32 R tls_tx_data [31:0] $end
+$var wire 1 # tls_tx_ready $end
+$var wire 1 ? tls_tx_valid $end
+$var wire 1 S tx_full $end
+$var wire 1 T tx_empty $end
+$var wire 32 U tls_rx_data [31:0] $end
+$var wire 32 V tcp_tx_data [31:0] $end
+$var wire 1 W rx_full $end
+$var wire 1 X rx_empty $end
+$var parameter 32 Y DATA_WIDTH $end
+$scope module rx_buf $end
+$var wire 1 0 clk $end
+$var wire 1 W full $end
+$var wire 1 Z read_en $end
+$var wire 1 7 rst_n $end
+$var wire 32 [ write_data [31:0] $end
+$var wire 1 \ write_en $end
+$var wire 1 X empty $end
+$var parameter 32 ] ADDR_WIDTH $end
+$var parameter 32 ^ DATA_WIDTH $end
+$var reg 13 _ rd_ptr [12:0] $end
+$var reg 32 ` read_data [31:0] $end
+$var reg 13 a wr_ptr [12:0] $end
+$upscope $end
+$scope module tx_buf $end
+$var wire 1 0 clk $end
+$var wire 1 S full $end
+$var wire 1 b read_en $end
+$var wire 1 7 rst_n $end
+$var wire 32 c write_data [31:0] $end
+$var wire 1 d write_en $end
+$var wire 1 T empty $end
+$var parameter 32 e ADDR_WIDTH $end
+$var parameter 32 f DATA_WIDTH $end
+$var reg 13 g rd_ptr [12:0] $end
+$var reg 32 h read_data [31:0] $end
+$var reg 13 i wr_ptr [12:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope task assert_eq $end
+$var reg 1 j a $end
+$var reg 1 k exp $end
+$upscope $end
+$scope task clk_delay $end
+$var integer 32 l n [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b100000 f
+b1100 e
+b100000 ^
+b1100 ]
+b100000 Y
+$end
+#0
+$dumpvars
+b11 l
+xk
+xj
+b0 i
+b0 h
+b0 g
+0d
+b0 c
+0b
+b0 a
+b0 `
+b0 _
+0\
+b0 [
+0Z
+1X
+0W
+b0 V
+b0 U
+1T
+0S
+b0 R
+1Q
+b0 P
+b0 O
+0N
+b0 M
+b0 L
+0K
+b0 J
+b0 I
+0H
+1G
+b0 F
+b0 E
+b0 D
+b0 C
+b0 B
+0A
+1@
+0?
+b0 >
+1=
+0<
+0;
+0:
+09
+b0 8
+07
+06
+05
+04
+03
+02
+01
+00
+0/
+0.
+1-
+0,
+b0 +
+0*
+0)
+0(
+1'
+0&
+b0 %
+0$
+1#
+b0 "
+0!
+$end
+#5000
+10
+#10000
+00
+#15000
+10
+#20000
+00
+#25000
+10
+#26000
+17
+#30000
+00
+#35000
+10
+#36000
+b1 M
+1;
+#40000
+00
+#45000
+b1 O
+10
+#46000
+b10 l
+0;
+#50000
+00
+#55000
+10
+#60000
+00
+#65000
+10
+#66000
+b10 M
+1/
+0k
+0j
+#70000
+00
+#75000
+1(
+b10 O
+10
+#80000
+00
+#85000
+10
+#86000
+b11 M
+1(
+1:
+1k
+1j
+0/
+#90000
+00
+#95000
+0(
+b11 O
+10
+#100000
+00
+#105000
+10
+#106000
+b100 M
+16
+0k
+0j
+0:
+#110000
+00
+#115000
+1)
+b100 O
+10
+#120000
+00
+#125000
+10
+#126000
+b101 M
+1)
+1,
+1k
+1j
+06
+#130000
+00
+#135000
+1*
+0)
+b101 O
+10
+#140000
+00
+#145000
+10
+#146000
+1*
+0,
+#150000
+00
+#155000
+10
+#156000
+b10100 L
+1K
+13
+#160000
+00
+#165000
+b110 M
+0*
+b10100 +
+b10100 B
+b10100 I
+b10100 J
+1H
+10
+#166000
+b0 L
+0K
+b11 l
+03
+#170000
+00
+#175000
+b110 O
+10
+#180000
+00
+#185000
+1&
+1N
+10
+#190000
+00
+#195000
+10
+#196000
+b10 l
+0k
+0j
+#200000
+00
+#205000
+10
+#210000
+00
+#215000
+10
+#216000
+1A
+1<
+1k
+1j
+#220000
+00
+#225000
+0A
+b0 +
+b0 B
+b0 I
+b0 J
+0H
+10
+#230000
+00
+#235000
+10
+#236000
+b0 M
+b101 l
+0<
+#240000
+00
+#245000
+b0 O
+10
+#250000
+00
+#255000
+0&
+0N
+10
+#260000
+00
+#265000
+10
+#270000
+00
+#275000
+10
+#280000
+00
+#285000
+10
+#286000
+0k
+0j
+#290000
+00
+#295000
+10
+#296000
+b1 M
+1;
+#300000
+00
+#305000
+b1 O
+10
+#306000
+b10 l
+0;
+#310000
+00
+#315000
+10
+#320000
+00
+#325000
+10
+#330000
+00
+#335000
+10
+#336000
+b110010 L
+1K
+12
+#340000
+00
+#345000
+b110 M
+b110010 +
+b110010 B
+b110010 I
+b110010 J
+1H
+10
+#346000
+b0 L
+0K
+b11 l
+02
+#350000
+00
+#355000
+b110 O
+10
+#360000
+00
+#365000
+1&
+1N
+10
+#370000
+00
+#375000
+10
+#376000
+1A
+b10 l
+1<
+1k
+1j
+#380000
+00
+#385000
+0A
+b0 +
+b0 B
+b0 I
+b0 J
+0H
+10
+#390000
+00
+#395000
+10
+#396000
+b0 M
+b101 l
+0<
+#400000
+00
+#405000
+b0 O
+10
+#410000
+00
+#415000
+0&
+0N
+10
+#420000
+00
+#425000
+10
+#430000
+00
+#435000
+10
+#440000
+00
+#445000
+10
+#446000
+0k
+0j
+#450000
+00
+#455000
+10
+#456000
+b101010 L
+1K
+12
+11
+#460000
+00
+#465000
+b101010 +
+b101010 B
+b101010 I
+b101010 J
+1H
+10
+#466000
+b0 L
+0K
+b11 l
+02
+01
+#470000
+00
+#475000
+10
+#480000
+00
+#485000
+10
+#490000
+00
+#495000
+10
+#496000
+1A
+b10 l
+1<
+#500000
+00
+#505000
+0A
+b0 +
+b0 B
+b0 I
+b0 J
+0H
+10
+#510000
+00
+#515000
+10
+#516000
+b101 l
+0<
+#520000
+00
+#525000
+10
+#530000
+00
+#535000
+10
+#540000
+00
+#545000
+10
+#550000
+00
+#555000
+10
+#560000
+00
+#565000
+10
+#566000
+b1010 l
+0@
+#570000
+00
+#575000
+10
+#580000
+00
+#585000
+10
+#590000
+00
+#595000
+10
+#600000
+00
+#605000
+10
+#610000
+00
+#615000
+10
+#620000
+00
+#625000
+10
+#630000
+00
+#635000
+10
+#640000
+00
+#645000
+10
+#650000
+00
+#655000
+10
+#660000
+00
+#665000
+10
+#666000
+b100 l
+1@
+0k
+0j
+#670000
+00
+#675000
+10
+#680000
+00
+#685000
+10
+#690000
+00
+#695000
+10
+#700000
+00
+#705000
+10
+#706000
